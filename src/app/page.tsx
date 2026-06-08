@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { GrantScoutReport, Opportunity } from "@/src/lib/types";
 
 type AgentPanel = "decision" | "evidence" | "tasks" | "drafts" | "data";
@@ -41,6 +41,7 @@ function downloadReportJson(data: unknown) {
 }
 
 export default function HomePage() {
+  const [mounted, setMounted] = useState(false);
   const [narrative, setNarrative] = useState(
     "I am an international student in the US with a master's in data science. I want AI, data science, research, nonprofit, or startup grants. I need free opportunities only."
   );
@@ -157,6 +158,14 @@ export default function HomePage() {
     { id: "drafts", label: "Drafts" },
     { id: "data", label: "Data" },
   ];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <main className="agent-app" suppressHydrationWarning />;
+  }
 
   return (
     <main className="agent-app">
