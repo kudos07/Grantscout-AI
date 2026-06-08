@@ -1,0 +1,708 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #070a12;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel2: rgba(255, 255, 255, 0.09);
+  --text: rgba(255, 255, 255, 0.93);
+  --muted: rgba(255, 255, 255, 0.70);
+  --border: rgba(255, 255, 255, 0.14);
+  --focus: rgba(34, 211, 238, 0.35);
+  --shadow: 0 16px 60px rgba(0, 0, 0, 0.55);
+  --shadow2: 0 18px 70px rgba(0, 0, 0, 0.65);
+  --accent: #22d3ee;
+  --accent2: #a78bfa;
+  --danger: #fb7185;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(1000px 760px at 8% 4%, rgba(34, 211, 238, 0.22), transparent 62%),
+    radial-gradient(900px 700px at 96% 0%, rgba(167, 139, 250, 0.24), transparent 58%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 38%),
+    var(--bg);
+  color: var(--text);
+  font-feature-settings: "ss01" 1, "cv02" 1, "cv03" 1, "cv04" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button:disabled,
+input:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.agent-app {
+  display: grid;
+  gap: 1rem;
+}
+
+.agent-hero,
+.mission-card,
+.agent-console,
+.decision-panel {
+  background:
+    linear-gradient(180deg, var(--panel2), rgba(255, 255, 255, 0.035)),
+    rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.agent-hero {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 1.2rem;
+  position: relative;
+}
+
+.agent-hero::before {
+  background:
+    linear-gradient(90deg, rgba(34, 211, 238, 0.22), transparent 34%),
+    linear-gradient(270deg, rgba(167, 139, 250, 0.22), transparent 38%);
+  content: "";
+  inset: 0;
+  opacity: 0.85;
+  pointer-events: none;
+  position: absolute;
+}
+
+.agent-identity,
+.agent-stats {
+  position: relative;
+}
+
+.agent-identity {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.agent-pulse {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 999px;
+  box-shadow: 0 0 52px rgba(34, 211, 238, 0.52);
+  flex: 0 0 auto;
+  height: 72px;
+  position: relative;
+  width: 72px;
+}
+
+.agent-pulse::after {
+  border: 1px solid rgba(34, 211, 238, 0.55);
+  border-radius: 999px;
+  content: "";
+  inset: -10px;
+  opacity: 0.9;
+  position: absolute;
+}
+
+.agent-pulse.is-live::after {
+  animation: pulse 1.2s ease-out infinite;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.agent-identity h1 {
+  font-size: clamp(2rem, 5vw, 4.8rem);
+  font-weight: 900;
+  line-height: 0.95;
+  max-width: 900px;
+}
+
+.agent-stats {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(3, minmax(96px, 1fr));
+}
+
+.agent-stats div {
+  background: rgba(7, 10, 18, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  padding: 0.85rem;
+}
+
+.agent-stats span,
+.field span,
+.switch-line span,
+.console-tools span {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.agent-stats strong {
+  display: block;
+  font-size: 1.35rem;
+  line-height: 1;
+  margin-top: 0.35rem;
+}
+
+.agent-grid {
+  align-items: flex-start;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(285px, 0.72fr) minmax(480px, 1.35fr) minmax(340px, 0.86fr);
+}
+
+.mission-card,
+.agent-console,
+.decision-panel {
+  padding: 1rem;
+}
+
+.mission-card,
+.decision-panel {
+  display: grid;
+  gap: 1rem;
+  position: sticky;
+  top: 1rem;
+}
+
+.mission-card h2,
+.console-head h2 {
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-top: 0.2rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field textarea,
+.field input,
+.console-tools input {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  color: var(--text);
+  outline: none;
+  padding: 0.78rem 0.88rem;
+  width: 100%;
+}
+
+.field textarea {
+  min-height: 210px;
+  resize: vertical;
+}
+
+.field textarea:focus,
+.field input:focus,
+.console-tools input:focus {
+  border-color: rgba(34, 211, 238, 0.72);
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+.signal-chips,
+.console-tools,
+.panel-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.signal-chips button,
+.advanced-controls summary,
+.launch-agent,
+.console-tools label,
+.console-tools button,
+.decision-actions button,
+.decision-actions a,
+.panel-tabs button,
+.panel-actions a {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.signal-chips button {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.16), rgba(167, 139, 250, 0.14));
+  color: var(--text);
+  padding: 0.55rem 0.78rem;
+}
+
+.brief-grid,
+.advanced-controls > div {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.brief-grid .wide {
+  grid-column: 1 / -1;
+}
+
+.advanced-controls summary {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.65rem 0.85rem;
+  width: fit-content;
+}
+
+.advanced-controls > div {
+  margin-top: 0.75rem;
+}
+
+.switch-line {
+  align-items: center;
+  display: flex;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+}
+
+.launch-agent {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 1), rgba(167, 139, 250, 1));
+  border-color: rgba(34, 211, 238, 0.45);
+  box-shadow: var(--shadow2);
+  color: rgba(5, 8, 16, 0.96);
+  font-weight: 900;
+  min-height: 3.25rem;
+  padding: 0.85rem 1.1rem;
+}
+
+.agent-console {
+  display: grid;
+  gap: 1rem;
+  min-height: 720px;
+}
+
+.console-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.console-tools {
+  justify-content: flex-end;
+}
+
+.console-tools input {
+  max-width: 240px;
+}
+
+.console-tools label,
+.console-tools button {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text);
+  display: inline-flex;
+  gap: 0.45rem;
+  min-height: 2.6rem;
+  padding: 0.6rem 0.85rem;
+}
+
+.agent-error {
+  background: rgba(251, 113, 133, 0.12);
+  border: 1px solid rgba(251, 113, 133, 0.4);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.85rem;
+}
+
+.agent-error span,
+.agent-error small {
+  color: var(--muted);
+}
+
+.runway {
+  display: grid;
+  gap: 1rem;
+}
+
+.agent-timeline {
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.timeline-step {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: grid;
+  gap: 0.65rem;
+  min-height: 130px;
+  padding: 0.8rem;
+}
+
+.timeline-step span {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  display: inline-flex;
+  font-weight: 900;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.timeline-step.done span,
+.timeline-step.running span {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 1), rgba(167, 139, 250, 1));
+  color: rgba(5, 8, 16, 0.96);
+}
+
+.timeline-step.running {
+  border-color: rgba(34, 211, 238, 0.55);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.18);
+}
+
+.timeline-step strong {
+  display: block;
+  line-height: 1.1;
+}
+
+.timeline-step p,
+.empty-agent-state p,
+.decision-card small,
+.decision-card p,
+.muted-copy,
+.panel-body p,
+.panel-body li,
+.panel-body pre,
+.panel-empty span,
+.evidence-list small {
+  color: var(--muted);
+}
+
+.decision-stream {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.empty-agent-state {
+  align-content: center;
+  background:
+    radial-gradient(circle at center, rgba(34, 211, 238, 0.18), transparent 52%),
+    rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: grid;
+  gap: 1rem;
+  grid-column: 1 / -1;
+  justify-items: center;
+  min-height: 360px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.scanner-mark {
+  align-items: center;
+  display: grid;
+  gap: 0.75rem;
+  justify-items: center;
+}
+
+.scanner-mark span {
+  animation: spin 8s linear infinite;
+  background: conic-gradient(var(--accent), var(--accent2), transparent 42%);
+  border-radius: 999px;
+  height: 150px;
+  width: 150px;
+}
+
+.scanner-mark strong {
+  font-size: 1.4rem;
+}
+
+.decision-card {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: grid;
+  overflow: hidden;
+}
+
+.decision-card.selected {
+  border-color: rgba(34, 211, 238, 0.75);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.2), var(--shadow2);
+}
+
+.decision-card > button {
+  display: grid;
+  gap: 0.5rem;
+  min-height: 260px;
+  padding: 0.95rem;
+  text-align: left;
+}
+
+.decision-score {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 1), rgba(167, 139, 250, 1));
+  border-radius: 999px;
+  color: rgba(5, 8, 16, 0.96);
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 0.52rem 0.72rem;
+  width: fit-content;
+}
+
+.decision-label,
+.deadline {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.decision-card strong {
+  font-size: 1.25rem;
+  line-height: 1.1;
+}
+
+.decision-card strong,
+.decision-card small,
+.decision-card p {
+  overflow-wrap: anywhere;
+}
+
+.deadline {
+  align-self: end;
+  background: rgba(167, 139, 250, 0.14);
+  border: 1px solid rgba(167, 139, 250, 0.28);
+  border-radius: 999px;
+  color: var(--muted);
+  padding: 0.34rem 0.65rem;
+  width: fit-content;
+}
+
+.decision-actions {
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  padding: 0.75rem;
+}
+
+.decision-actions button,
+.decision-actions a,
+.panel-actions a {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text);
+  flex: 1 1 90px;
+  min-height: 2.55rem;
+  padding: 0.62rem 0.78rem;
+  text-align: center;
+}
+
+.decision-actions .is-saved,
+.panel-actions a:last-child {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 1), rgba(167, 139, 250, 1));
+  color: rgba(5, 8, 16, 0.96);
+  font-weight: 900;
+}
+
+.panel-tabs {
+  display: grid;
+  gap: 0.45rem;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.panel-tabs button {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--muted);
+  min-height: 2.35rem;
+}
+
+.panel-tabs .active {
+  background: linear-gradient(90deg, rgba(34, 211, 238, 1), rgba(167, 139, 250, 1));
+  color: rgba(5, 8, 16, 0.96);
+  font-weight: 900;
+}
+
+.panel-body {
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.panel-empty {
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 0.4rem;
+  padding-top: 1rem;
+}
+
+.agent-verdict {
+  align-content: center;
+  aspect-ratio: 1;
+  background:
+    radial-gradient(circle, rgba(7, 10, 18, 0.94) 56%, transparent 57%),
+    conic-gradient(var(--accent), var(--accent2), var(--accent));
+  border-radius: 999px;
+  display: grid;
+  justify-items: center;
+  margin-inline: auto;
+  width: 172px;
+}
+
+.agent-verdict span {
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.agent-verdict strong {
+  color: var(--muted);
+}
+
+.panel-body h3 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.panel-body h4 {
+  font-weight: 900;
+}
+
+.panel-body ul {
+  display: grid;
+  gap: 0.45rem;
+  list-style: disc;
+  padding-left: 1.15rem;
+}
+
+.evidence-list,
+.draft-block {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.evidence-list div,
+.draft-block {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.evidence-list small {
+  display: block;
+  font-size: 0.72rem;
+  overflow-wrap: anywhere;
+}
+
+.panel-body pre {
+  max-height: 520px;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+code {
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.18);
+  border-radius: 6px;
+  padding: 0.1rem 0.35rem;
+}
+
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+@keyframes pulse {
+  to {
+    opacity: 0;
+    transform: scale(1.45);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1320px) {
+  .agent-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-card,
+  .decision-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 880px) {
+  .agent-hero,
+  .console-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .agent-stats,
+  .agent-timeline,
+  .decision-stream {
+    grid-template-columns: 1fr;
+  }
+
+  .console-tools {
+    justify-content: flex-start;
+  }
+
+  .console-tools input,
+  .console-tools label,
+  .console-tools button {
+    flex: 1 1 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .agent-identity {
+    align-items: flex-start;
+  }
+
+  .agent-pulse {
+    height: 52px;
+    width: 52px;
+  }
+
+  .brief-grid,
+  .advanced-controls > div,
+  .panel-tabs {
+    grid-template-columns: 1fr;
+  }
+}
